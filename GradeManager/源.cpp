@@ -3,22 +3,25 @@ using namespace std;
 //结构体定义
 struct person{
 	char name[30];
+	int ID;
 	int grades;
 } people[30];
 //变量定义
 
-int Pnumber=0;
+int Pnumber;
 char name[30];
 char classname[30];
 int grade;
+int ID;
 bool isChoosed=false,isnotChoosed=true;
 //函数定义
 void show(){
-	cout<<Pnumber;
+	cout<<Pnumber<<endl;
 	if(Pnumber!=0){
 		for(int i=0;i<=Pnumber-1;i++){
 			cout<<"name:"<<people[i].name<<"\t";
 			cout<<"grade:"<<people[i].grades<<endl;
+			cout<<"ID:"<<people[i].ID<<endl;
 			}
 		}else{
 		cout<<"There is no student.\n";
@@ -28,9 +31,11 @@ void show(){
 void choose(){
 	cout<<"Please input your name:\t";
 	cin>>name;
-	cout<<Pnumber;
+	cout<<"Please input your ID:\t";
+	cin>>ID;
+	cout<<Pnumber<<endl;
 	for(int i=0;i<=(Pnumber-1);i++){//for只执行了1次
-		if(name==people[i].name){
+		if(ID==people[i].ID){
 					cout<<"You has choosen the class.";
 					isChoosed=true;
 				}			
@@ -42,6 +47,7 @@ void choose(){
 		}		
 		tem.grades  = 0;
 		people[Pnumber]=tem;
+		people[Pnumber].ID=ID;
 		Pnumber+=1;	
 	}
 	isChoosed=false;
@@ -49,10 +55,10 @@ void choose(){
 }
 
 void cancel(){
-	cout<<"Please input your name:\t";
-	cin>>name;
+	cout<<"Please input your ID:\t";
+	cin>>ID;
 	for(int i=0;i<=(Pnumber-1);i++){
-		if(name==people[i].name){
+		if(ID==people[i].ID){
 			for(int j = i;j<=(Pnumber-2);j++){
 				people[j]=people[j+1];
 			}
@@ -62,7 +68,8 @@ void cancel(){
 		}		
 		tem.grades  = 0;
 		people[Pnumber-1]=tem;
-		isnotChoosed=false;		
+		isnotChoosed=false;	
+		Pnumber-=1;
 		}			
 			}
 	if(isnotChoosed){
@@ -74,18 +81,19 @@ void cancel(){
 	}
 
 void input(){
-	cout<<"Please input your name:\t";
-	cin>>name;
+	cout<<"Please input your ID:\t";
+	cin>>ID;
 	cout<<"Please input your grade:\t";
 	cin>>grade;
 	for(int i=0;i<=(Pnumber-1);i++){
-		if(name==people[i].name){
+		if(ID==people[i].ID){
 			people[i].grades=grade;
+			cout<<people[i].grades;
 					isChoosed=true;
 				}			
 			}
 	if(!isChoosed){
-		cout<<"You have not choosed this class";
+		cout<<"You have not choosed this class"<<endl;
 	}
 	isChoosed=false;
 
@@ -94,6 +102,7 @@ void input(){
 //主函数
 int main(){
 	int action;
+	Pnumber=0;
 	for(int i=0;i<=30;i++){
 		people[i].grades=0;
 }
